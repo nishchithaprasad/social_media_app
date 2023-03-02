@@ -10,5 +10,5 @@ npm run start
 ### To run client application
 ```
 cd frontend
-npm start
+npm run start
 ```
