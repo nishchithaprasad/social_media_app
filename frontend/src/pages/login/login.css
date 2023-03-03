@@ -54,7 +54,7 @@
     outline: none;
 }
 
-.loginButton, .registerButton {
+.loginButtonLogin, .registerButtonLogin {
     height: 50px;
     border-radius: 10px;
     border: none;
@@ -64,7 +64,7 @@
     color: white;
 }
 
-.loginButton {
+.loginButtonLogin {
     background-color: #1775ee;
 }
 
@@ -73,7 +73,7 @@
     color: #1775ee;
 }
 
-.registerButton {
+.registerButtonLogin {
     width: 60%;
     align-self: center;
     background-color: #42b72a;

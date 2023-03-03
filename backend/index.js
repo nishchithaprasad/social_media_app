@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require ("cors");
 const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
@@ -17,6 +18,7 @@ require("./database/database.js").connect();
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
+app.use(cors());
 
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
