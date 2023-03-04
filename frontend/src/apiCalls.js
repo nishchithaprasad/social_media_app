@@ -40,6 +40,15 @@ export const getFriends = async (userId) => {
     }
 }
 
+export const getUser = async (userId) => {
+    try {
+        const res = await axios.get(`http://localhost:8800/api/user?userId=${userId}`);
+        return res.data;
+    } catch(error) {
+        console.log(error);
+    }
+}
+
 export const followUser = async (userId, currentUserId, dispatch) => {
     try {
         await axios.put(`http://localhost:8800/api/user/${userId}/follow`, {
@@ -73,6 +82,33 @@ export const createNewPost = async (postDetails) => {
 export const uploadFile = async (fileData) => {
     try {
         await axios.post("http://localhost:8800/api/upload", fileData);
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+export const getConversations = async (userId) => {
+    try {
+        const res = await axios.get(`http://localhost:8800/api/conversations/${userId}`);
+        return res.data;
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+export const getMessages = async (conversationId) => {
+    try {
+        const res = await axios.get(`http://localhost:8800/api/message/${conversationId}`);
+        return res.data;
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+export const postMessage = async (message) => {
+    try {
+        const res = await axios.post(`http://localhost:8800/api/message`, message);
+        return res.data;
     } catch(error) {
         console.log(error);
     }
