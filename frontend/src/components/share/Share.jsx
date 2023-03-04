@@ -1,7 +1,7 @@
 import "./share.css";
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { PermMedia, Label, Room, EmojiEmotions } from "@material-ui/icons"
+import { PermMedia, Label, Room, EmojiEmotions, Cancel } from "@material-ui/icons"
 import { uploadFile, createNewPost } from "../../apiCalls";
 export default function Share() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -23,6 +23,7 @@ export default function Share() {
 			uploadFile(data);
 		}
 		createNewPost(newPost);
+		window.location.reload();
 	}
 	return (
 		<div className="share">
@@ -45,6 +46,12 @@ export default function Share() {
 					/>
 				</div>
 				<hr className="shareDivider" />
+				{file && (
+					<div className="shareImageContainer" >
+						<img src={URL.createObjectURL(file)} alt="" className="shareImage" />
+						<Cancel className="shareCancelImage" onClick={() => setFile(null)}/>
+					</div>
+				)}
 				<form className="shareBottom" onSubmit={submitHandler}>
 					<div className="shareOptions">
 						<label htmlFor="file" className="shareOption">

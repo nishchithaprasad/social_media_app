@@ -4,7 +4,10 @@ import {
     LOGIN_FAILURE,
     REGISTER_START,
     REGISTER_SUCCESS,
-    REGISTER_FAILURE }
+    REGISTER_FAILURE,
+    FOLLOW,
+	UNFOLLOW
+}
 from "./const/index";
 import axios from "axios";
 
@@ -25,6 +28,37 @@ export const registerCall = async (userDetails, dispatch) => {
         dispatch({ type: REGISTER_SUCCESS, payload: res.data });
     } catch (error) {
         dispatch({ type: REGISTER_FAILURE, payload: error });
+    }
+}
+
+export const getFriends = async (userId) => {
+    try {
+        const res = await axios.get(`http://localhost:8800/api/user/friends/${userId}`);
+        return res.data;
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+export const followUser = async (userId, currentUserId, dispatch) => {
+    try {
+        await axios.put(`http://localhost:8800/api/user/${userId}/follow`, {
+            userId: currentUserId
+        });
+        dispatch({ type: FOLLOW, payload: userId });
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+export const unFollowUser = async (userId, currentUserId, dispatch) => {
+    try {
+        await axios.put(`http://localhost:8800/api/user/${userId}/unfollow`, {
+            userId: currentUserId
+        });
+        dispatch({ type: UNFOLLOW, payload: userId });
+    } catch(error) {
+        console.log(error);
     }
 }
 

@@ -4,7 +4,10 @@ import {
     LOGIN_FAILURE,
     REGISTER_START,
     REGISTER_SUCCESS,
-    REGISTER_FAILURE }
+    REGISTER_FAILURE,
+    FOLLOW,
+	UNFOLLOW
+}
   from "../const/index";
 
 const AuthReducer = (state, action) => {
@@ -44,6 +47,27 @@ const AuthReducer = (state, action) => {
                 user: null,
                 isFetching: false,
                 error: true,
+            };
+        case FOLLOW: 
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    following: [
+                        ...state.user.following,
+                        action.payload
+                    ]
+                }
+            };
+        case UNFOLLOW: 
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    following: state.user.following.filter(
+                        follow => follow !== action.payload
+                    )
+                }
             };
         default:
             return state;
