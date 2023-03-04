@@ -11,25 +11,6 @@ import "./rightbar.css";
 export default function Rightbar({ user }) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const { user: currentUser, dispatch } = useContext(AuthContext);
-    const [friends, setFriends] = useState([]);
-    const [followed, setFollowed] = useState(currentUser.following.includes(user?._id));
-    
-    useEffect(() => {
-        const getFriendList = async () => {
-            const friendList = await getFriends(user._id);
-            setFriends(friendList);
-        }
-        getFriendList();
-    }, [user]);
-
-    const followHandler = async () => {
-        if (followed) {
-            await unFollowUser(user?._id, currentUser._id, dispatch);
-        } else {
-            await followUser(user?._id, currentUser._id, dispatch);
-        }    
-        setFollowed(!followed);
-    }
     
     const HomeRightbar = () => {
         return (
@@ -48,6 +29,24 @@ export default function Rightbar({ user }) {
     };
 
     const ProfileRightbar = () => {
+        const [friends, setFriends] = useState([]);
+        const [followed, setFollowed] = useState(currentUser.following.includes(user?._id));
+        useEffect(() => {
+            const getFriendList = async () => {
+                const friendList = await getFriends(user._id);
+                setFriends(friendList);
+            }
+            getFriendList();
+        }, [user]);
+
+        const followHandler = async () => {
+            if (followed) {
+                await unFollowUser(user?._id, currentUser._id, dispatch);
+            } else {
+                await followUser(user?._id, currentUser._id, dispatch);
+            }    
+            setFollowed(!followed);
+        }
         return (
             <>
                 {user.username !== currentUser.username && (
