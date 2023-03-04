@@ -37,7 +37,7 @@ export default function Rightbar({ user }) {
                 setFriends(friendList);
             }
             getFriendList();
-        }, [user]);
+        }, []);
 
         const followHandler = async () => {
             if (followed) {
